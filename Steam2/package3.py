@@ -67,6 +67,6 @@ class Package(object) :
                 datasection_length += chunk_length
                 packedbytes += chunk_length
 
-            indexsection.insert(0, filename + "\x00" + struct.pack("<LLLL", self.file_unpacked_sizes[filename], packedbytes, outfileoffset, len(filename) + 1))
+            indexsection.insert(0, filename + b"\x00" + struct.pack("<LLLL", self.file_unpacked_sizes[filename], packedbytes, outfileoffset, len(filename) + 1))
 
         return b"".join(datasection) + b"".join(indexsection) + struct.pack("<BLL", self.pkg_ver, self.compress_level, number_of_files)
